@@ -1,0 +1,29 @@
+<configuration>
+
+    <!-- Habilita cores -->
+    <conversionRule conversionWord="clr"
+                    converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+
+    <!-- Padrão de log -->
+    <property name="LOG_PATTERN"
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(%-5level) %clr(${PID:- }){magenta} %clr([%thread]){faint} %clr(%logger{36}){cyan} - %msg%n%wex"/>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Nível de log -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Logs mais detalhados para seu projeto -->
+    <logger name="com.natureguard" level="DEBUG"/>
+
+</configuration>
