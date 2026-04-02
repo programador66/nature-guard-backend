@@ -23,7 +23,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponseDTO register(RegisterRequestDTO request) {
         if (!request.getPassword().equals(request.getConfirmationPassword())) {
-            throw new RuntimeException("Passwords do not match");
+            throw new RuntimeException("As senhas não coincidem");
+        }
+
+        if (repository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Não foi possível completar o cadastro. Verifique os dados e tente novamente.");
         }
 
         User user = new User();
@@ -42,10 +46,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponseDTO login(LoginRequestDTO request) {
         User user = repository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
 
         if (!encoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid password");
+            throw new RuntimeException("Credenciais inválidas");
         }
 
         String token = jwtService.generateToken(user.getEmail());
