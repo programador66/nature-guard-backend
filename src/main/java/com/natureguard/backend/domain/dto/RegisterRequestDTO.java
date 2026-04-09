@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 public class RegisterRequestDTO {
@@ -23,6 +24,7 @@ public class RegisterRequestDTO {
     private String confirmationPassword;
 
     @NotNull(message = "Modo autônomo é obrigatório")
-    private Boolean isAutonomousMode;
+    @JsonProperty("isAutonomousMode")
+    private Boolean autonomousMode;
 }
 

@@ -1,4 +1,4 @@
-package com.natureguard.backend.controller;
+package com.natureguard.backend.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

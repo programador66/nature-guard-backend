@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(encoder.encode(request.getPassword()));
-        user.setIsAutonomousMode(request.getIsAutonomousMode());
+        user.setAutonomousMode(request.getAutonomousMode());
         user.setCreatedAt(LocalDateTime.now());
 
         User saved = repository.save(user);
@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
-                .isAutonomousMode(user.getIsAutonomousMode())
+                .autonomousMode(user.getAutonomousMode())
                 .createdAt(user.getCreatedAt())
                 .token(token)
                 .build();

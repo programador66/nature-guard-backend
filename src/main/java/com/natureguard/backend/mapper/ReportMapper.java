@@ -28,10 +28,25 @@ public class ReportMapper {
                 .build();
     }
 
+    public static void updateEntity(Report report, ReportRequestDTO dto, List<String> newImageUrls) {
+        report.setTitle(dto.getTitle());
+        report.setDescription(dto.getDescription());
+        report.setTags(dto.getTags());
+        report.setLocation(Location.builder()
+                .lat(dto.getLat())
+                .lng(dto.getLng())
+                .address(dto.getAddress())
+                .build());
+
+        if (newImageUrls != null && !newImageUrls.isEmpty()) {
+            report.getImages().addAll(newImageUrls);
+        }
+    }
+
     public static ReportResponseDTO toDTO(Report report, User user) {
-        String userName = (user != null && Boolean.TRUE.equals(user.getIsAutonomousMode()))
-                ? "Anônimo"
-                : (user != null ? user.getName() : "Anônimo");
+        String userName = (user != null && Boolean.TRUE.equals(user.getAutonomousMode()))
+                ? "Usuário anônimo"
+                : (user != null ? user.getName() : "Usuário anônimo");
 
         return ReportResponseDTO.builder()
                 .id(report.getId())
