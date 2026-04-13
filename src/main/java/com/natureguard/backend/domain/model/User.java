@@ -18,7 +18,9 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
-    private Boolean isAutonomousMode;
+
+    @Column(name = "is_autonomous_mode")
+    private Boolean autonomousMode;
 
     private LocalDateTime createdAt;
 }

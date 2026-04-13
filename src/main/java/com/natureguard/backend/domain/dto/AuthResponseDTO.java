@@ -2,6 +2,7 @@ package com.natureguard.backend.domain.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +12,10 @@ public class AuthResponseDTO {
     private Long id;
     private String name;
     private String email;
-    private Boolean isAutonomousMode;
+
+    @JsonProperty("isAutonomousMode")
+    private Boolean autonomousMode;
+
     private LocalDateTime createdAt;
     private String token;
 }
